@@ -9,5 +9,5 @@ Project Issue Tracker
 
 ### Modified by Akiko Takano
 
-- Change to use ES6 for server-side (Node.js) with ``babel-node``.
-- In local, use nodemon with ``npm run start-local``.
+- Change ES6 style (const, function)
+- Repository: https://github.com/akiko-pusu/fcc-project-issue-tracker
