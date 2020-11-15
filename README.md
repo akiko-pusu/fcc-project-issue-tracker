@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/akiko-pusu/fcc-project-issue-tracker)
+
 **FreeCodeCamp**- Information Security and Quality Assurance
 ------
 [![Run on Repl.it](https://repl.it/badge/github/freeCodeCamp/boilerplate-project-issuetracker)](https://repl.it/github/freeCodeCamp/boilerplate-project-issuetracker)
