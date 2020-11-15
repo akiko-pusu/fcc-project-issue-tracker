@@ -11,3 +11,34 @@ Project Issue Tracker
 
 - Change ES6 style (const, function)
 - Repository: https://github.com/akiko-pusu/fcc-project-issue-tracker
+
+### Files
+
+- ``.replit`` is a configuration file to run this application on reple.it.
+
+```bash
+
+issue_tracker $ tree -La 1
+.
+├── .env
+├── .env.sample
+├── .git
+├── .gitignore
+├── .history
+├── .replit
+├── README.md
+├── assertion-analyser.js
+├── connection.js
+├── node_modules
+├── package-lock.json
+├── package.json
+├── public
+├── routes
+├── server.js
+├── test-runner.js
+├── tests
+└── views
+
+7 directories, 11 files
+
+```
