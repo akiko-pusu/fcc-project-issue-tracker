@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quality Assurance Projects - Issue Tracker</title>
+    <meta name="description" content="A cool thing made with HyperDev">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header>
+      <h1 id='projectTitle'></h1>
+    </header>
+    <center>
+      <div id='submitNewIssue'>
+        <br>
+        <h3>Submit a new issue:</h3>
+        <form id="newIssue" class="issue" method="post" action="/api/">
+          <input type="text" name="issue_title" placeholder="*Title" style="width: 320px; margin-bottom: 3px;" required='true'><br>
+          <textarea type="text" name="issue_text" placeholder="*Text" style="width: 320px; height: 100px;" required='true'></textarea><br>
+          <input type="text" name="created_by" placeholder="*Created by" style="width: 100px" required='true'>
+          <input type="text" name="assigned_to" placeholder="(opt)Assigned to" style="width: 100px">
+          <input type="text" name="status_text" placeholder="(opt)Status text" style="width: 100px"><br>
+          <button type="submit">Submit Issue</button>
+        </form>
+      </div>
+
+      <div id='issueDisplay'></div>
+
+      <hr style='margin: 50px; margin-top: 200px'>
+    </center>
+
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script>
+      $(function() {
+        // ページが読み込まれたらコンテンツを書き換えます
+        // 現在のプロジェクトをURLから取得
+        const currentProject = window.location.pathname.replace(/\//g, "")
+        const targetUrl = `/api/issues/${currentProject}`
+        $('#projectTitle').text('All issues for: '+ currentProject)
+
+        // コンテンツを書き換えたら、全てのissueをajax requestで取得します
+        // TODO: うまく取得できない場合はログに出すこと（とメッセージを出すこと）
+        $.ajax({
+          type: "GET",
+          url: targetUrl
+        }).then((data) => {
+          // console.log(`GET /api/issues/${currentProject} is done`)
+          let issues = []
+          data.forEach(function (ele) {
+            
+            let openstatus = (ele.open.toString().toLowerCase() === 'true') ? 'open' : 'closed'
+            console.log(openstatus)
+            const single = [
+              '<div class="issue '+ openstatus + ' box">',
+              '<p class="id">id: '+ ele._id + '</p>',
+              '<h3>'+ ele.issue_title +' -  (' + openstatus + ')</h3>',
+              '<br>',
+              '<p>' + ele.issue_text + '</p>',
+              '<p>' + ele.status_text + '</p>',
+              '<br>',
+              '<p class="id"><b>Created by:</b> ' + ele.created_by + '  <b>Assigned to:</b> ' + ele.assigned_to,
+                '<p class="id"><b>Created on:</b> ' + ele.created_on + '  <b>Last updated:</b> ' + ele.updated_on,
+                '<br><a href="#" class="closeIssue" id="' + ele._id + '">close?</a> <a href="#" class="deleteIssue" id="' + ele._id + '">delete?</a>',
+                '</div>'
+              ]
+            issues.push(single.join(''))
+          })
+
+          if (issues == 0) {
+            return $('#issueDisplay').html(`<b>Empty.....</b>`)
+          }
+          $('#issueDisplay').html(issues.join(''))
+        },
+        (error) => {
+          $('#issueDisplay').html(`<b>Error. Can't get issue data.</b>`)
+        })
+
+        $('#newIssue').submit(function (e) {
+          e.preventDefault()
+          $(this).attr('action', targetUrl)
+          $.ajax({
+            type: "POST",
+            url: targetUrl,
+            data: $(this).serialize()
+          }).then((data) => {
+            window.location.reload(true)
+          })
+        })
+
+        $('#issueDisplay').on('click','.closeIssue', function (e) {
+          $.ajax({
+            type: "PUT",
+            url: targetUrl,
+            data: {_id: $(this).attr('id'), open: false},
+          }).then((data) => {
+            alert(JSON.stringify(data))
+            window.location.reload(true)
+          })
+          e.preventDefault()
+        })
+
+        $('#issueDisplay').on('click','.deleteIssue', function (e) {
+          $.ajax({
+            type: "DELETE",
+            url: targetUrl,
+            data: {_id: $(this).attr('id')},
+          }).then((data) => {
+            alert(JSON.stringify(data))
+            window.location.reload(true)
+          })
+          e.preventDefault()
+        })
+      }) //# sourceURL=http://foo/bar/foobar.js
+   </script>
+    <footer>
+        This page is provided as one of the Quality Assurance Projects Project's work of <a href="https://learn.freecodecamp.org/"
+            target="_blank" rel="noopener noreferrer">
+            freeCodeCamp</a>.
+    </footer>
+  </body>
+</html>
