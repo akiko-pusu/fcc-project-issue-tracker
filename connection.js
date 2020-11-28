@@ -13,8 +13,12 @@ var _db
 module.exports = {
   connectToServer: (callback) => {
     MongoClient.connect(url, connectOption, (err, client) => {
-      _db = client.db('fcc')
-      console.log(_db)
+      try {
+        _db = client.db('fcc')
+        console.log(_db)
+      } catch {
+        console.log('Database connection failed. Please confirm your MongoDB setting.')
+      }
       return callback(err)
     })
   },

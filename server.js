@@ -53,7 +53,11 @@ app.use(function (req, res, next) {
 
 // Initialize connection once
 mongoUtil.connectToServer((err, client) => {
-  if (err) throw err
+  if (err) {
+    console.log(`ERROR: ${err.message}. To restart, run "npm run start"`)
+    return
+  }
+
   // Start the application after the database connection is ready
   // Start our server and tests!
   app.listen(process.env.PORT || 3000, function () {
