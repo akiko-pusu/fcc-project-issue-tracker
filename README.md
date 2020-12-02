@@ -1,18 +1,28 @@
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/akiko-pusu/fcc-project-issue-tracker)
 
 **FreeCodeCamp**- Information Security and Quality Assurance
 ------
-[![Run on Repl.it](https://repl.it/badge/github/freeCodeCamp/boilerplate-project-issuetracker)](https://repl.it/github/freeCodeCamp/boilerplate-project-issuetracker)
-Project Issue Tracker
+Project Personal Library
 
 1) SET NODE_ENV to `test` without quotes and set DB to your mongo connection string in .env file
 2) Complete the project in `routes/api.js` or by creating a handler/controller
 3) You will create all of the functional tests in `tests/2_functional-tests.js`
 
+#### Project Requirement
+
+Ref. 
+https://www.freecodecamp.org/learn/quality-assurance/quality-assurance-projects/personal-library
+
+Sample:
+https://personal-library.freecodecamp.rocks/
+
+On 20201119, boilerplate project and source code was missing....
+So I have to create by myself to meet the specifications!
+
 ### Modified by Akiko Takano
 
 - Change ES6 style (const, function)
 - Repository: https://github.com/akiko-pusu/fcc-project-issue-tracker
+    - Branch: akiko/personal-library
 
 ### Files
 
